@@ -1,3 +1,7 @@
+export const SET_HOBBIES = 'SET_HOBBIES';
+export const ADD_HOBBY = 'CREATE_HOBBY';
+export const REPLACE_HOBBY = 'REPLACE_HOBBY';
+
 export const SET_USER = 'SET_USER';
 export const GET_USER = 'GET_USER';
 export const CLEAR_USER = 'CLEAR_USER';

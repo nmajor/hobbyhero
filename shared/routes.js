@@ -6,6 +6,7 @@ import HomeWrapper from './wrappers/HomeWrapper';
 import RegisterWrapper from './wrappers/RegisterWrapper';
 import LoginWrapper from './wrappers/LoginWrapper';
 import DashboardWrapper from './wrappers/DashboardWrapper';
+import NewHobbyWrapper from './wrappers/NewHobbyWrapper';
 
 const routes = (
   <Route path="/" component={App} >
@@ -13,6 +14,7 @@ const routes = (
     <Route path="/register" component={RegisterWrapper} />
     <Route path="/login" component={LoginWrapper} />
     <Route path="/dashboard" component={DashboardWrapper} />
+    <Route path="/hobbies/new" component={NewHobbyWrapper} />
   </Route>
 );
 

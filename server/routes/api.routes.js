@@ -4,6 +4,17 @@ const router = express.Router(); // eslint-disable-line new-cap
 
 import User from '../models/user';
 
+import * as HobbyController from '../controllers/hobby.controller';
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.status(401);
+    res.json({ error: { message: 'Unauthorized. User may not be logged in.' } });
+  }
+}
+
 router.get('/user', (req, res) => {
   if (req.user) {
     res.json(req.user);
@@ -47,5 +58,12 @@ router.get('/logout', (req, res) => {
 router.get('/health', (req, res) => {
   res.send('OK');
 });
+
+router.get('/hobbies', ensureAuthenticated, HobbyController.get);
+router.get('/hobbies/:id', ensureAuthenticated, HobbyController.findOne);
+router.post('/hobbies', ensureAuthenticated, HobbyController.create);
+router.put('/hobbies/:id', ensureAuthenticated, HobbyController.patch);
+router.patch('/hobbies/:id', ensureAuthenticated, HobbyController.patch);
+router.delete('/hobbies/:id', ensureAuthenticated, HobbyController.remove);
 
 module.exports = router;

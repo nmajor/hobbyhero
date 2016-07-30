@@ -5,10 +5,12 @@ import { reducer as formReducer } from 'redux-form';
 // import _ from 'lodash';
 
 import user from './user';
+import hobbies from './hobbies';
 
 const appReducer = combineReducers({
   form: formReducer,
   user,
+  hobbies,
 });
 
 const rootReducer = (state = initialState, action) => {

@@ -1,22 +1,22 @@
 import React, { PropTypes, Component } from 'react';
 import _ from 'lodash';
 import Header from '../components/Header';
-import LoginForm from '../components/forms/LoginForm';
+import HobbyForm from '../components/forms/HobbyForm';
 import { connect } from 'react-redux';
 import * as Actions from '../redux/actions/index';
 
-class LoginWrapper extends Component {
+class NewHobbyWrapper extends Component {
   constructor(props, context) {
     super(props, context);
-    this.login = this.login.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
-  login(props) {
+  submit(props) {
     return new Promise((resolve, reject) => {
-      this.props.dispatch(Actions.loginUser(props, (res) => {
+      this.props.dispatch(Actions.createHobby(props, (res) => {
         if (res.errors) {
           const errors = {
-            _error: res.errors.base || 'Login failed.',
+            _error: res.errors.base || 'Hobby creation failed.',
           };
 
           _.forEach(res.errors, (val, key) => {
@@ -26,7 +26,7 @@ class LoginWrapper extends Component {
           reject(errors);
         } else {
           resolve();
-          this.context.router.push('/dashboard');
+          // this.context.router.push('/dashboard');
         }
       }));
     });
@@ -34,12 +34,14 @@ class LoginWrapper extends Component {
 
   render() {
     return (
-      <div className="login-container">
+      <div className="new-hobby-container">
         <Header />
-        <div className="row">
-          <div className="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-            <h1>Login</h1>
-            <LoginForm onSubmit={this.login} />
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <h1>New Hobby</h1>
+              <HobbyForm onSubmit={this.submit} />
+            </div>
           </div>
         </div>
       </div>
@@ -53,13 +55,9 @@ function mapStateToProps(store) {
   };
 }
 
-LoginWrapper.propTypes = {
+NewHobbyWrapper.propTypes = {
   dispatch: PropTypes.func.isRequired,
   user: PropTypes.object,
 };
 
-LoginWrapper.contextTypes = {
-  router: PropTypes.object.isRequired,
-};
-
-export default connect(mapStateToProps)(LoginWrapper);
+export default connect(mapStateToProps)(NewHobbyWrapper);
