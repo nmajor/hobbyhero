@@ -59,8 +59,8 @@ router.get('/health', (req, res) => {
   res.send('OK');
 });
 
-router.get('/hobbies', ensureAuthenticated, HobbyController.get);
-router.get('/hobbies/:id', ensureAuthenticated, HobbyController.findOne);
+router.get('/hobbies', HobbyController.get);
+router.get('/hobbies/:id', HobbyController.findOne);
 router.post('/hobbies', ensureAuthenticated, HobbyController.create);
 router.put('/hobbies/:id', ensureAuthenticated, HobbyController.patch);
 router.patch('/hobbies/:id', ensureAuthenticated, HobbyController.patch);

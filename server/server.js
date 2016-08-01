@@ -43,15 +43,17 @@ import serverConfig from './config';
 
 // MongoDB Connection
 mongoose.connect(serverConfig.mongoURL);
+mongoose.Promise = Promise;
 
 import User from './models/user';
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+const sessionSecret = process.env.SESSION_SECRET || 'supercat';
 // Define session middleware
 const sessionMiddleware = session({
-  secret: 'supercat',
+  secret: sessionSecret,
   resave: true,
   saveUninitialized: false,
   store: new ConnectMongo({
@@ -121,7 +123,7 @@ app.use((req, res) => {
     initialState.user = req.user || {};
     const store = configureStore(initialState);
 
-    fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
+    fetchComponentData(store.dispatch, renderProps.components, renderProps.params, req.headers.cookie)
       .then(() => {
         const initialView = renderToString(
           <Provider store={store}>

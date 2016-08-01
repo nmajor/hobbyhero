@@ -8,7 +8,7 @@ export function findOne(req, res) {
 }
 
 export function get(req, res) {
-  const query = req.user && req.user.email === 'nick@nmajor.com' ? {} : { visible: true };
+  const query = req.user ? {} : { visible: true };
 
   Hobby.find(query)
   .then((hobbies) => {
