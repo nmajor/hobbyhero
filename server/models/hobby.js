@@ -1,4 +1,5 @@
 import Mongoose, { Schema } from 'mongoose';
+import _ from 'lodash';
 
 const HobbySchema = new Schema({
   name: String,
@@ -12,29 +13,35 @@ const HobbySchema = new Schema({
   affiliateLinks: [],
 });
 
-export default Mongoose.model('Hobby', HobbySchema);
+function slugify(text) {
+  return text.toString().toLowerCase()
+  .replace(/\s+/g, '-')           // Replace spaces with -
+  .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+  .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+  .replace(/^-+/, '')             // Trim - from start of text
+  .replace(/-+$/, '');            // Trim - from end of text
+}
 
-// name: { type: String, required: 'Name is required!' },
-//   slug: { type: String, required: 'Slug is required!' },
-//   public: { type: Boolean, default: false },
-//   imageUrl: String,
-//   indoor: { type: Boolean, default: false },
-//   computer: { type: Boolean, default: false },
-//   practical: { type: Boolean, default: false },
-//   artistic: { type: Boolean, default: false },
-//   difficulty: Number,
-//   startingCost: [],
-//   repeatCost: [],
-//   desc: String,
-//   resources: [{
-//     ref: String,
-//     text: String
-//   }],
-//   affiliateLinks: [{
-//     ref: String,
-//     text: String
-//   }],
-//   videos: [{
-//     src: String,
-//     text: String
-//   }],
+HobbySchema.post('init', function () {  // eslint-disable-line func-names
+  this._original = this.toObject();
+});
+
+HobbySchema.pre('save', function (next) { // eslint-disable-line func-names
+  if ((this.propChanged('name') && !_.isEmpty(this.name)) || _.isEmpty(this.slug)) {
+    this.slug = slugify(this.name);
+  }
+
+  next();
+});
+
+HobbySchema.methods.propChanged = function propChanged(propsString) {
+  const original = this._original || {};
+  const current = this.toObject();
+
+  const originalProp = _.get(original, propsString);
+  const currentProp = _.get(current, propsString);
+
+  return !_.isEqual(originalProp, currentProp);
+};
+
+export default Mongoose.model('Hobby', HobbySchema);

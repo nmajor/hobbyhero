@@ -4,7 +4,7 @@ import HobbyListItem from '../listItems/HobbyListItem';
 class HobbyList extends Component {
   renderHobbyListItems() {
     return this.props.hobbies.map((hobby) => {
-      return <HobbyListItem hobby={hobby} />;
+      return <HobbyListItem key={hobby._id} hobby={hobby} />;
     });
   }
   render() {

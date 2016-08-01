@@ -5,7 +5,7 @@ import Loading from '../Loading';
 class RegisterForm extends Component { // eslint-disable-line react/prefer-stateless-function
   renderSubmitting() {
     if (this.props.submitting) {
-      return <span className="outside-button-loading"><Loading /></span>;
+      return <span className="button-loading"><Loading /></span>;
     }
   }
   renderErrorClass(field) {

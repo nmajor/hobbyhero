@@ -7,9 +7,7 @@ const HomeWrapper = () => {
     <Header />
     <div className="home">
       <div className="home-content">
-        <h1 className="home-title">
-          Home Page 2
-        </h1>
+        <h1 className="home-title">Home Page 2</h1>
       </div>
     </div>
   </div>);

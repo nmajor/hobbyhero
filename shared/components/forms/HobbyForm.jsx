@@ -6,7 +6,7 @@ import Loading from '../Loading';
 class HobbyForm extends Component { // eslint-disable-line react/prefer-stateless-function
   renderSubmitting() {
     if (this.props.submitting) {
-      return <span className="outside-button-loading"><Loading /></span>;
+      return <span className="button-loading"><Loading /></span>;
     }
   }
   renderErrorClass(field) {
@@ -23,6 +23,7 @@ class HobbyForm extends Component { // eslint-disable-line react/prefer-stateles
     const {
       fields: {
         name,
+        slug,
         desc,
         tags,
         images,
@@ -41,6 +42,13 @@ class HobbyForm extends Component { // eslint-disable-line react/prefer-stateles
             <label className="control-label">Name</label>
             <input type="text" className="form-control" {...name} />
             {this.renderError(name)}
+          </div>
+        </div>
+        <div className="col-md-12">
+          <div className={`form-group ${this.renderErrorClass(slug)}`}>
+            <label className="control-label">Slug</label>
+            <input type="text" disabled className="form-control" {...slug} />
+            {this.renderError(slug)}
           </div>
         </div>
         <div className="col-md-12">
@@ -152,6 +160,7 @@ HobbyForm = reduxForm({ // eslint-disable-line no-class-assign
   form: 'hobby',
   fields: [
     'name',
+    'slug',
     'desc',
     'tags[]',
     'images[]',

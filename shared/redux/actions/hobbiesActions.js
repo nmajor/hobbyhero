@@ -89,3 +89,34 @@ export function createHobby(props, cb) {
     });
   };
 }
+
+export function updateHobby(hobbyId, props, cb) {
+  return (dispatch) => {
+    return fetch(`${baseURL}/api/hobbies/${hobbyId}`, {
+      credentials: 'include',
+      method: 'put',
+      body: JSON.stringify(props),
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+    })
+    .then((res) => {
+      if (res.status >= 400) {
+        throw new Error(`Bad response from server ${res.status} ${res.statusText}`);
+      }
+
+      return res.json();
+    })
+    .then((res) => {
+      if (res.error) {
+        cb(res);
+        throw new Error(res.error.message);
+      }
+      dispatch(replaceHobby(res));
+      cb(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  };
+}

@@ -27,7 +27,14 @@ export function create(req, res) {
 export function patch(req, res) {
   Hobby.findOne({ _id: req.params.id })
   .then((hobby) => {
-    hobby.imap = req.body.imap; // eslint-disable-line no-param-reassign
+    hobby.name = req.body.name; // eslint-disable-line no-param-reassign
+    hobby.desc = req.body.desc; // eslint-disable-line no-param-reassign
+    hobby.visible = req.body.visible; // eslint-disable-line no-param-reassign
+    hobby.tags = req.body.tags; // eslint-disable-line no-param-reassign
+    hobby.images = req.body.images; // eslint-disable-line no-param-reassign
+    hobby.videos = req.body.videos; // eslint-disable-line no-param-reassign
+    hobby.resources = req.body.resources; // eslint-disable-line no-param-reassign
+    hobby.affiliateLinks = req.body.affiliateLinks; // eslint-disable-line no-param-reassign
 
     return hobby.save();
   })
