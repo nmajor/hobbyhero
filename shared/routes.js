@@ -16,7 +16,7 @@ const routes = (
     <Route path="/login" component={LoginWrapper} />
     <Route path="/dashboard" component={DashboardWrapper} />
     <Route path="/hobbies/new" component={NewHobbyWrapper} />
-    <Route path="/hobbies/:hobbyId/edit" component={EditHobbyWrapper} />
+    <Route path="/hobbies/:hobbySlug/edit" component={EditHobbyWrapper} />
   </Route>
 );
 

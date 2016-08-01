@@ -11,7 +11,7 @@ class EditHobbyWrapper extends Component {
 
     this.submit = this.submit.bind(this);
 
-    this.hobby = _.find(this.props.hobbies, { _id: this.props.params.hobbyId }) || {};
+    this.hobby = _.find(this.props.hobbies, { slug: this.props.params.hobbySlug }) || {};
   }
   componentDidMount() {
     if (this.props.hobbies.length < 1) {
@@ -19,7 +19,7 @@ class EditHobbyWrapper extends Component {
     }
   }
   componentWillReceiveProps(nextProps) {
-    this.hobby = _.find(nextProps.hobbies, { _id: nextProps.params.hobbyId }) || {};
+    this.hobby = _.find(nextProps.hobbies, { slug: nextProps.params.hobbySlug }) || {};
   }
   submit(props) {
     return new Promise((resolve, reject) => {
