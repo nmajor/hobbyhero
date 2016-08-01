@@ -8,6 +8,7 @@ import LoginWrapper from './wrappers/LoginWrapper';
 import DashboardWrapper from './wrappers/DashboardWrapper';
 import NewHobbyWrapper from './wrappers/NewHobbyWrapper';
 import EditHobbyWrapper from './wrappers/EditHobbyWrapper';
+import ViewHobbyWrapper from './wrappers/ViewHobbyWrapper';
 
 const routes = (
   <Route path="/" component={App} >
@@ -17,6 +18,7 @@ const routes = (
     <Route path="/dashboard" component={DashboardWrapper} />
     <Route path="/hobbies/new" component={NewHobbyWrapper} />
     <Route path="/hobbies/:hobbySlug/edit" component={EditHobbyWrapper} />
+    <Route path="/hobbies/:hobbySlug" component={ViewHobbyWrapper} />
   </Route>
 );
 

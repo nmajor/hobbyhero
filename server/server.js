@@ -79,10 +79,13 @@ app.use(cookieParser());
 app.use(Express.static(path.resolve(__dirname, '../public')));
 app.use('/api', api);
 
+import Helmet from 'react-helmet';
+
 // Render Initial HTML
 const renderFullPage = (html, renderedState) => {
   const cssPath = process.env.NODE_ENV === 'production' ? '/css/style.css' : '';
   const cssInclude = cssPath ? `<link rel=\"stylesheet\" href=${cssPath} />` : '';
+  const head = Helmet.rewind();
   return `
     <!doctype html>
     <html>
@@ -90,7 +93,7 @@ const renderFullPage = (html, renderedState) => {
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>starter</title>
+        ${head.title.toString()}
         <link rel="stylesheet" href="/css/bootstrap.min.css" />
         ${cssInclude}
         <link rel="stylesheet"

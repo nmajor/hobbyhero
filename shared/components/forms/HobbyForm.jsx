@@ -30,6 +30,7 @@ class HobbyForm extends Component { // eslint-disable-line react/prefer-stateles
         videos,
         resources,
         affiliateLinks,
+        visible,
       },
       error,
       handleSubmit,
@@ -141,6 +142,15 @@ class HobbyForm extends Component { // eslint-disable-line react/prefer-stateles
           </div>
         </div>
       </div>
+      <div className="row">
+        <div className="col-md-12">
+          <div className={`form-group ${this.renderErrorClass(visible)}`}>
+            <input type="checkbox" {...visible} />
+            <label className="left-bumper control-label">Visible</label>
+            {this.renderError(visible)}
+          </div>
+        </div>
+      </div>
       <div className="form-group">
         {error && <div className="text-danger">{error}</div>}
         <button className="btn btn-success" type="submit">Submit {this.renderSubmitting()}</button>
@@ -162,6 +172,7 @@ HobbyForm = reduxForm({ // eslint-disable-line no-class-assign
     'name',
     'slug',
     'desc',
+    'visible',
     'tags[]',
     'images[]',
     'videos[]',
