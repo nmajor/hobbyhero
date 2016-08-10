@@ -26,8 +26,7 @@ class HobbyForm extends Component { // eslint-disable-line react/prefer-stateles
         slug,
         desc,
         tags,
-        images,
-        videos,
+        previews,
         resources,
         affiliateLinks,
         visible,
@@ -79,32 +78,20 @@ class HobbyForm extends Component { // eslint-disable-line react/prefer-stateles
         </div>
         <div className="col-md-6">
           <div className="form-group">
-            <label className="control-label">Images</label>
-            {images.map((image, index) =>
+            <label className="control-label">Previews</label>
+            {previews.map((preview, index) =>
               <div className="form-group" key={index}>
-                <PureInput type="text" placeholder="Image" field={image} />
-                {this.renderError(image)}
+                <input type="radio" {...preview.kind} value="image" checked={preview.kind.value === 'image'} />
+                <label className="left-bumper right-bumper control-label">Image</label>
+                <input type="radio" {...preview.kind} value="video" checked={preview.kind.value === 'video'} />
+                <label className="left-bumper control-label">Video</label>
+                <PureInput type="text" field={preview.src} />
+                {this.renderError(preview)}
               </div>
             )}
             <div className="form-group">
-              <button className="btn btn-success" type="button" onClick={event => { event.preventDefault(); images.addField(); }}>
+              <button className="btn btn-success" type="button" onClick={event => { event.preventDefault(); previews.addField(); }}>
                 <i /> Add Image
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="form-group">
-            <label className="control-label">Videos</label>
-            {videos.map((video, index) =>
-              <div className="form-group" key={index}>
-                <PureInput type="text" placeholder="Video" field={video} />
-                {this.renderError(video)}
-              </div>
-            )}
-            <div className="form-group">
-              <button className="btn btn-success" type="button" onClick={event => { event.preventDefault(); videos.addField(); }}>
-                <i /> Add Video
               </button>
             </div>
           </div>
@@ -174,8 +161,8 @@ HobbyForm = reduxForm({ // eslint-disable-line no-class-assign
     'desc',
     'visible',
     'tags[]',
-    'images[]',
-    'videos[]',
+    'previews[].kind',
+    'previews[].src',
     'resources[]',
     'affiliateLinks[]',
   ],

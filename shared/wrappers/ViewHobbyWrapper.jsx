@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import _ from 'lodash';
-import Header from '../components/Header';
+// import Header from '../components/Header';
 import HobbyView from '../components/HobbyView';
 import { connect } from 'react-redux';
 import * as Actions from '../redux/actions/index';
@@ -20,7 +20,6 @@ class EditHobbyWrapper extends Component {
     this.hobby = _.find(nextProps.hobbies, { slug: nextProps.params.hobbySlug }) || {};
   }
   renderHelmetData() {
-    console.log(this.hobby);
     return {
       title: this.hobby.name,
       titleTemplate: 'dathobby.com - %s',
@@ -33,15 +32,15 @@ class EditHobbyWrapper extends Component {
     return <Helmet {...this.renderHelmetData()} />;
   }
   renderHeader() {
-    if (this.props.user) {
-      return <Header />;
-    }
+    // if (this.props.user) {
+    //   return <Header />;
+    // }
   }
   render() {
     return (<div className="hobby-container">
       {this.renderHeader()}
       {this.renderHelmet()}
-      <div className="container">
+      <div className="container-fluid">
         <div className="row">
           <div className="col-md-12">
             <HobbyView hobby={this.hobby} />

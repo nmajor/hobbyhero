@@ -7,8 +7,10 @@ const HobbySchema = new Schema({
   desc: String,
   visible: { type: Boolean, default: false },
   tags: [],
-  images: [],
-  videos: [],
+  previews: [{
+    kind: String,
+    src: String,
+  }],
   resources: [],
   affiliateLinks: [],
 });
