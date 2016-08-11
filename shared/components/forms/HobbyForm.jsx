@@ -91,7 +91,7 @@ class HobbyForm extends Component { // eslint-disable-line react/prefer-stateles
             )}
             <div className="form-group">
               <button className="btn btn-success" type="button" onClick={event => { event.preventDefault(); previews.addField(); }}>
-                <i /> Add Image
+                <i /> Add Preview
               </button>
             </div>
           </div>

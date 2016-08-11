@@ -10,3 +10,8 @@ export function buildHobbyHelmet(hobby) {
     ]}
   />);
 }
+
+export function youTubeIdFromUrl(url) {
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/; // eslint-disable-line
+  return url.match(regExp)[2];
+}
